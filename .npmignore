@@ -1,0 +1,6 @@
+node_modules/
+.vscode/
+.git/
+singleCoverPart.js
+testHelper.js
+mergeConfig.json

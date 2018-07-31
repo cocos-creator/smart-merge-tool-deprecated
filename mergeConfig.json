@@ -1,0 +1,11 @@
+{
+    "smartMerge": {
+        "dependMergeTool": "D:/KDiff3/kdiff3.exe"
+    },
+    "replaceData": {
+        "dataType": [],
+        "dataName": [],
+        "branch": [],
+        "isReplace": false
+    }
+}
