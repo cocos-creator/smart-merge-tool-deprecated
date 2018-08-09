@@ -5,19 +5,22 @@
   "main": "merge.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ColinCollins/smart-merge.git"
+    "url": "git@github.com:cocos-creator/smart-merge-tool.git"
   },
   "bin": {
     "merge": "./bin/index.js"
   },
   "author": "ColinCollins",
-  "license": "ISC",
+  "license": { 
+    "type" : "Cocos",
+    "url" : "./licenses/LICENSE"
+  },
   "devDependencies": {
     "commander": "^2.16.0",
     "del": "^3.0.0"
   },
   "bugs": {
-    "url": "https://github.com/ColinCollins/smart-merge/issues"
+    "url": "https://github.com/cocos-creator/smart-merge-tool/issues"
   },
   "readmeFilename": "README.md"
 }
