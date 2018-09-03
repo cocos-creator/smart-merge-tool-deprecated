@@ -27,11 +27,17 @@ Creator Smart-Merge(以下简称 __CSM__)工具首先通过识别你当前使用
 
 ### 合并冲突解决工具配置流程：
 
-1. 安装合并工具到全局设置。
+1. 安装合并工具到全局设置。这样你就可以使用 __merge__ 开头的命令操作了。
    ```
    npm install -g creator-smart-merge
    ``` 
-2. 配置你的版本管理工具(目前只支持 SourceTree)，点击 Tools -> Options -> Diff 设置 MergeTool 为 Custom, 并配置 Diff Command 为 merge 指令,传入参数设置为:
+2. 配置你的版本管理工具(目前只支持 SourceTree)，点击 Tools -> Options -> Diff 设置 MergeTool 为 Custom, 
+之后配置 __Merge Command__: 
+    ```
+    merge
+    ```
+    __Arguments__ 传入参数设置为:
+
     ```
     start $BASE $LOCAL $REMOTE
     ```
