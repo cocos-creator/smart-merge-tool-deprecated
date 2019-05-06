@@ -4,9 +4,17 @@ const del = require('del');
 const Convert = require('./Supporter/IdConverter');
 
 module.exports = {
+    /**
+     * 将 json 文件转换为 .fire 文件
+     * 1. 获取 merge.json 数据
+     * 2. 按照节点树形式遍历 merge.json 中 node 对象，相关的 prefab，component clickEvent 数据将在这个过程中按照顺序遍历。
+     * 3. 上述遍历过程中，将遍历数据填充进入 result 对象
+     * 3. 填充数据过程中 __id__ 数据转换为 index 类型，生成 fire 文件
+     */
     coverFile: function (tempFile, savePath, name, fileType) {
         var merge = fs.readFileSync(tempFile, {encoding: 'utf8'});
         var data = JSON.parse(merge);  
+        // result is filled by fire data
         var result = this.trans2Normal(data);
     
         console.log('``````````````finished!````````````````');
@@ -19,9 +27,10 @@ module.exports = {
         del.sync(path.join(savePath, 'Mergecache'), {force: true});
     },
 
+    // 遍历 merge.json 数据
     trans2Normal: function (mergeData) {
         var tempData = [];
-        mergeData = this.sortForTree(mergeData);
+        mergeData = this.sortByNodeTree(mergeData);
         for (let i = 0; i < mergeData.length; i++) {
             let obj = mergeData[i];
             tempData.push({
@@ -39,7 +48,8 @@ module.exports = {
         return result;
     },
 
-    sortForTree: function (mergeData) {
+    // 按照节点树的方式遍历数据
+    sortByNodeTree: function (mergeData) {
         var tempData = [];
         tempData.push(mergeData[0]);
 
@@ -62,6 +72,7 @@ module.exports = {
         return tempData;
     },
 
+    // 递归子节点
     recurseChild: function (node, mergeData) {
         var _self = this;
         var record, result = [];
@@ -85,6 +96,7 @@ module.exports = {
         return result;
     },
 
+    // 转换组件信息数据
     transComponents: function (obj, tempData) {
         if (!obj._components) {
             return;
@@ -104,6 +116,7 @@ module.exports = {
         }
     },
 
+    // 转换 Prefab 信息数据
     transPrefabInfos: function (obj, tempData) {
         if (!obj._prefabInfos) {
             return;
@@ -123,6 +136,7 @@ module.exports = {
         }
     },
 
+    // 转换点击事件数据，Click 事件场景内数据比较特殊，因此在遍历和转换过程中都单独列出保留
     transClickEvent: function (obj, tempData) {
         if (!obj._clickEvent) {
             return;

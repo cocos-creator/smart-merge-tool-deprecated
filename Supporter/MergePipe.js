@@ -15,7 +15,7 @@ function replaceData (type, dataName, branch) {
     } 
 }
 /**
- * only replace the data. 
+ * only replace specific data. 
  * @param {Array} tempData - currect target to  be replaced  by the data
  * @param {Object} mainData - as the replacement data
  * @param {Object} mainData.content - the whole data content about the data
@@ -48,6 +48,7 @@ function partOfNode (mainData, dataName) {
         mainData[2] && replaceContent(mainData[2], data, index, dataName);
     });
 }
+
 // this part contain component, prefabInfo, clickEvent, custome
 function partOfDefault (mainData, dataName, type) {
     mainData[0].forEach(function (data, index1) {
@@ -133,6 +134,7 @@ function checkIdReplaceable (tempData, mainData) {
 }
 
 /**
+ * 在 PreMerge.js 的 outputFiles 过程中，会进行一次遍历替换, 用户可以根据 mergeConfig.json 中的 replaceData 设置，传入你想要遍历替换的数据属性。
  * @param {Array} branchData - It is currect branch model data.
  * @param {Object} config - It is the config that you want to replace branch.
  * @param {String} config.dataType - It is the data type that can help you find the target exactly.
