@@ -1,6 +1,7 @@
 const fs = require('fs');
 const process = require('child_process');
 
+// 方便用户本地调用, 若是用户没有 sourceTree 类型的工具，或者配置不成功，帮助用户直接通过 vsc 启动合并工具
 (function () {
     var launch = fs.readFileSync('.vscode/launch.json',{encoding: 'utf8'});
     var parse = JSON.parse(launch);

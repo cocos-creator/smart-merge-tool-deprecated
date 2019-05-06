@@ -6,6 +6,7 @@ var convert = function (tempData) {
 
 var proto = convert.prototype;
 
+// 将 fire 数据中的 index （1，2，3...）转换成 id 标识。
 proto.indexToMark = function () {
     for (let i = 0; i < this.tempData.length; i++) {
         var obj = this.tempData[i];
@@ -13,6 +14,7 @@ proto.indexToMark = function () {
     }
 }
 
+// 定位 __id__ 并转换为标识数据
 proto.locationId = function (obj) {
     var str = JSON.stringify(obj.data, null, '\t');
     str = str.replace(/"__id__": ([0-9]+)/g, (match, index) => {
@@ -24,6 +26,7 @@ proto.locationId = function (obj) {
     return obj.data;
 }
 
+// 将 fire 数据中的 __id__ 标识转换成 index（1，2，3...）。
 proto.markToIndex = function () {
     var data = [];
     for (let i = 0; i < this.tempData.length; i++) {
@@ -35,6 +38,7 @@ proto.markToIndex = function () {
     return data;
 }
 
+// 从当前已有数据中获取 __id__
 proto.replaceMarkFun = function (index, obj) {
     var __id__ = ''; 
     var target = this.tempData[index];
@@ -55,6 +59,7 @@ proto.replaceMarkFun = function (index, obj) {
     return __id__;
 }
 
+// 定位 __id__ 并转换为 index 数据
 proto.locationIndex = function (objData) {
     // must the node sort first, or will lost the __id__
     var str = JSON.stringify(objData, null, '\t');
@@ -67,6 +72,7 @@ proto.locationIndex = function (objData) {
     return objData;    
 }
 
+// 从当前已有数据中获取 index
 proto.replaceIndexFun = function (__id__) {
     var index = this.tempData.findIndex(function (ele) {
         if (`"${__id__}"` === JSON.stringify(ele.__id__)) {
